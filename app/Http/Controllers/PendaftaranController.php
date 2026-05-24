@@ -35,8 +35,8 @@ class PendaftaranController extends Controller
             'nik' => ['required', 'regex:/^[0-9]+$/', 'size:16'],
             'place_date_birth' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string'],
-            'whatsapp_number' => ['required', 'string', 'max:20'],
-            'phone' => ['required', 'string', 'max:20'],
+            'whatsapp_number' => ['required', 'regex:/^[0-9]+$/', 'min:10', 'max:15'],
+            'phone' => ['required', 'regex:/^[0-9]+$/', 'min:10', 'max:15'],
             'email' => ['required', 'email', 'max:255'],
         ];
 
@@ -79,7 +79,7 @@ class PendaftaranController extends Controller
             // Data Rekening
             $rules['bri_customer_status'] = ['required', 'string'];
             $rules['has_bri_cik_ditiro_account'] = ['required', 'string'];
-            $rules['bri_cik_ditiro_account_number'] = ['required', 'string'];
+            $rules['bri_cik_ditiro_account_number'] = ['required', 'regex:/^[0-9]+$/'],
             $rules['has_qris_bri_cik_ditiro'] = ['required', 'string'];
 
             // Persetujuan
@@ -90,6 +90,15 @@ class PendaftaranController extends Controller
             'nik.required' => 'NIK tidak boleh kosong',
             'nik.regex' => 'NIK harus berupa angka',
             'nik.size' => 'NIK harus terdiri dari 16 digit',
+            'whatsapp_number.required' => 'Nomor WhatsApp wajib diisi',
+            'whatsapp_number.regex' => 'Nomor WhatsApp harus berupa angka',
+            'whatsapp_number.min' => 'Nomor WhatsApp minimal 10 digit',
+            'whatsapp_number.max' => 'Nomor WhatsApp maksimal 15 digit',
+            'phone.required' => 'Nomor telepon wajib diisi',
+            'phone.regex' => 'Nomor telepon harus berupa angka',
+            'phone.min' => 'Nomor telepon minimal 10 digit',
+            'phone.max' => 'Nomor telepon maksimal 15 digit',
+            'bri_cik_ditiro_account_number.regex' => 'Nomor rekening harus berupa angka',
             'email.required' => 'Email wajib diisi.',
             'email.email' => 'Format email tidak valid.',
             'agreement.accepted' => 'Anda harus menyetujui pernyataan yang berlaku.',

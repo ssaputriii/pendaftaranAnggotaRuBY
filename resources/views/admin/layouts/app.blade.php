@@ -183,12 +183,7 @@
                     <i class="bi bi-star"></i><span>Anggota Prioritas</span>
                 </a>
 
-                <div class="menu-label mt-3 mb-1 small text-uppercase fw-bold text-muted" style="padding: 0 16px; font-size: 0.7rem; letter-spacing: 0.05em;">Lainnya</div>
-                <a href="{{ route('admin.messages.index') }}" class="{{ request()->routeIs('admin.messages.*') ? 'active' : '' }}">
-                    <i class="bi bi-chat-left-text"></i><span>Pesan Masuk</span>
-                </a>
-                
-                <form action="{{ route('admin.logout') }}" method="POST" class="pt-2" onsubmit="return confirm('Apakah Anda yakin ingin keluar dari Admin Panel?')">
+                <form action="{{ route('admin.logout') }}" method="POST" class="pt-4" onsubmit="return confirm('Apakah Anda yakin ingin keluar dari Admin Panel?')">
                     @csrf
                     <button class="btn btn-danger w-100 rounded-3"><i class="bi bi-box-arrow-right me-2"></i> Logout</button>
                 </form>
@@ -293,7 +288,8 @@
         @if(session('success'))
             Toast.fire({
                 icon: 'success',
-                title: '{{ session('success') }}'
+                title: 'Berhasil!',
+                text: '{{ session('success') }}'
             });
         @endif
 
@@ -301,7 +297,8 @@
         @if(session('error'))
             Toast.fire({
                 icon: 'error',
-                title: '{{ session('error') }}'
+                title: 'Error!',
+                text: '{{ session('error') }}'
             });
         @endif
 

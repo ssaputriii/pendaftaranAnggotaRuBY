@@ -113,12 +113,16 @@
 
                                         <div class="col-md-6 mb-3">
                                             <label for="whatsapp_number" class="form-label fw-semibold">Nomor WhatsApp <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="whatsapp_number" name="whatsapp_number" value="{{ old('whatsapp_number') }}" placeholder="Contoh: 0851XXXXXXXX" required>
+                                            <input type="text" class="form-control" id="whatsapp_number" name="whatsapp_number" value="{{ old('whatsapp_number') }}" 
+                                                placeholder="Contoh: 0851XXXXXXXX" maxlength="15" minlength="10" pattern="\d+" inputmode="numeric" 
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
                                         </div>
 
                                         <div class="col-md-6 mb-3">
                                             <label for="phone" class="form-label fw-semibold">Nomor Telepon Aktif <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" placeholder="Contoh: 0812XXXXXXXX" required>
+                                            <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" 
+                                                placeholder="Contoh: 0812XXXXXXXX" maxlength="15" minlength="10" pattern="\d+" inputmode="numeric" 
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
                                         </div>
                                     </div>
                                 </div>
@@ -258,8 +262,8 @@
 
                                         <div class="col-md-12 mb-3">
                                             <label for="product_photos" class="form-label fw-semibold">Foto Produk <span class="text-danger">*</span></label>
-                                            <input type="file" class="form-control" id="product_photos" name="product_photos[]" multiple required>
-                                            <div class="form-text">Upload multiple file, maks 10 MB per file</div>
+                                            <input type="file" class="form-control" id="product_photos" name="product_photos[]" multiple accept=".png,.jpg,.jpeg" required>
+                                            <div class="form-text">Hanya file PNG, JPG, atau JPEG. Maksimum 10 MB per file.</div>
                                         </div>
 
                                         <div class="col-md-6 mb-3">
@@ -368,7 +372,9 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="bri_cik_ditiro_account_number" class="form-label fw-semibold">Nomor Rekening BRI <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="bri_cik_ditiro_account_number" name="bri_cik_ditiro_account_number" value="{{ old('bri_cik_ditiro_account_number') }}" placeholder='isi "0" apabila belum ada' required>
+                                            <input type="text" class="form-control" id="bri_cik_ditiro_account_number" name="bri_cik_ditiro_account_number" value="{{ old('bri_cik_ditiro_account_number') }}" 
+                                                placeholder='isi "0" apabila belum ada' pattern="\d+" inputmode="numeric" 
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label fw-semibold">Memiliki QRIS dari BRI <span class="text-danger">*</span></label>

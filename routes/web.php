@@ -22,7 +22,6 @@ Route::post('/daftar', [PendaftaranController::class, 'store'])->name('pendaftar
 Route::get('/daftar/sukses', [PendaftaranController::class, 'success'])->name('pendaftaran.sukses');
 
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
-Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
 
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 
@@ -44,10 +43,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/detail/{registration}', [AdminRegistrationController::class, 'update'])->name('registrations.update');
         Route::get('/detail/{registration}/pdf', [AdminRegistrationController::class, 'exportPdf'])->name('registrations.pdf');
         Route::delete('/detail/{registration}', [AdminRegistrationController::class, 'destroy'])->name('registrations.destroy');
-
-        Route::get('/pesan', [AdminMessageController::class, 'index'])->name('messages.index');
-        Route::get('/pesan/{message}', [AdminMessageController::class, 'show'])->name('messages.show');
-        Route::delete('/pesan/{message}', [AdminMessageController::class, 'destroy'])->name('messages.destroy');
 
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
     });

@@ -75,65 +75,19 @@
                 </div>
             </div>
 
-            <!-- FORM & MAP -->
+            <!-- MAP -->
             <div class="col-lg-7">
                 <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
                     <div class="card-body p-4 p-md-5">
-                        <h4 class="fw-bold mb-4">Kirim Pesan</h4>
-                        
-                        @if(session('success'))
-                            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4" role="alert">
-                                <i class="bi bi-check-circle-fill me-2"></i>
-                                {{ session('success') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        @endif
-
-                        @if ($errors->any())
-                            <div class="alert alert-danger border-0 shadow-sm mb-4">
-                                <ul class="mb-0">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        <form action="{{ route('kontak.store') }}" method="POST">
-                            @csrf
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="name" class="form-label fw-semibold small">Nama Lengkap</label>
-                                    <input type="text" name="name" id="name" class="form-control bg-light border-0 py-2" value="{{ old('name') }}" placeholder="Masukkan nama Anda" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="email" class="form-label fw-semibold small">Email</label>
-                                    <input type="email" name="email" id="email" class="form-control bg-light border-0 py-2" value="{{ old('email') }}" placeholder="email@contoh.com" required>
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="subject" class="form-label fw-semibold small">Subjek</label>
-                                    <input type="text" name="subject" id="subject" class="form-control bg-light border-0 py-2" value="{{ old('subject') }}" placeholder="Ada yang bisa kami bantu?" required>
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="message" class="form-label fw-semibold small">Pesan</label>
-                                    <textarea name="message" id="message" class="form-control bg-light border-0 py-2" rows="4" placeholder="Tuliskan pesan Anda secara detail..." required>{{ old('message') }}</textarea>
-                                </div>
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary w-100 py-2 rounded-3 shadow-sm mt-2">
-                                        <i class="bi bi-send-fill me-2"></i>Kirim Pesan Sekarang
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-
-                        <hr class="my-5">
-
                         <h5 class="fw-bold mb-3"><i class="bi bi-map-fill me-2 text-primary"></i>Lokasi Kami</h5>
+                        <p class="text-muted small mb-4">
+                            Kunjungi kantor kami untuk konsultasi langsung mengenai pendaftaran dan program pemberdayaan UMKM.
+                        </p>
                         <div class="rounded-4 overflow-hidden shadow-sm">
                             <iframe 
                                 src="https://www.google.com/maps?q=Rumah+BUMN+Yogyakarta&output=embed"
                                 width="100%" 
-                                height="300" 
+                                height="450" 
                                 style="border:0;" 
                                 allowfullscreen="" 
                                 loading="lazy">

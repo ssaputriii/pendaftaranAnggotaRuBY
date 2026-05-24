@@ -80,12 +80,16 @@
 
                                 <div class="mb-3">
                                     <label for="whatsapp_number" class="form-label fw-semibold">Nomor WhatsApp <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="whatsapp_number" name="whatsapp_number" value="{{ old('whatsapp_number') }}" placeholder="Contoh: 085161609877" required>
+                                    <input type="text" class="form-control" id="whatsapp_number" name="whatsapp_number" value="{{ old('whatsapp_number') }}" 
+                                        placeholder="Contoh: 085161609877" maxlength="15" minlength="10" pattern="\d+" inputmode="numeric" 
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="phone" class="form-label fw-semibold">Nomor Telepon Aktif <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" placeholder="Contoh: 085161609877" required>
+                                    <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" 
+                                        placeholder="Contoh: 085161609877" maxlength="15" minlength="10" pattern="\d+" inputmode="numeric" 
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
                                 </div>
 
                                 <div class="mb-3">

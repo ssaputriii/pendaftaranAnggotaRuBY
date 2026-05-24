@@ -39,9 +39,22 @@
 </div>
 
 @if (session('success'))
-    <div class="alert alert-success border-0 shadow-sm rounded-4 mb-4 d-flex align-items-center gap-2">
-        <i class="bi bi-check-circle-fill fs-5"></i>
-        <h6 class="mb-0 fw-bold">{{ session('success') }}</h6>
+    <div class="alert alert-success border-0 shadow-sm rounded-4 mb-4">
+        <div class="d-flex align-items-center gap-2 mb-2">
+            <i class="bi bi-check-circle-fill fs-5"></i>
+            <h6 class="mb-0 fw-bold">Berhasil!</h6>
+        </div>
+        @php
+            $message = session('success');
+            $parts = explode(' Perubahan: ', $message);
+        @endphp
+        <p class="mb-0 small ps-4">
+            {{ $parts[0] }}
+            @if(count($parts) > 1)
+                <br>
+                <span class="text-dark fw-bold mt-1 d-inline-block">Bagian yang diubah:</span> {{ $parts[1] }}
+            @endif
+        </p>
     </div>
 @endif
 

@@ -124,18 +124,80 @@ class RegistrationController extends Controller
 
         $validated = $request->validate($rules);
 
+        // Track Changes
+        $fieldLabels = [
+            'membership_status' => 'Status Keanggotaan',
+            'name' => 'Nama Lengkap',
+            'nik' => 'NIK',
+            'place_date_birth' => 'Tempat Tanggal Lahir',
+            'address' => 'Alamat',
+            'whatsapp_number' => 'Nomor WhatsApp',
+            'phone' => 'Nomor Telepon',
+            'email' => 'Email',
+            'has_business' => 'Status Usaha',
+            'business_name' => 'Nama Usaha',
+            'business_logo' => 'Logo Usaha',
+            'legalities' => 'Legalitas',
+            'npwp_number' => 'NPWP',
+            'business_type' => 'Jenis Usaha',
+            'business_description' => 'Deskripsi Usaha',
+            'business_start_year' => 'Tahun Mulai Usaha',
+            'business_chain' => 'Rantai Usaha',
+            'business_address_street' => 'Alamat Usaha (Jalan)',
+            'business_address_district' => 'Alamat Usaha (Kecamatan)',
+            'business_address_city' => 'Alamat Usaha (Kota)',
+            'business_address_province' => 'Alamat Usaha (Provinsi)',
+            'employee_count' => 'Jumlah Karyawan',
+            'monthly_turnover' => 'Omset Per Bulan',
+            'website' => 'Website',
+            'social_media' => 'Media Sosial',
+            'marketplaces' => 'Marketplace',
+            'events_followed' => 'Event Diikuti',
+            'has_exported' => 'Status Ekspor',
+            'export_destination' => 'Negara Tujuan Ekspor',
+            'bri_customer_status' => 'Status Nasabah BRI',
+            'has_bri_cik_ditiro_account' => 'Rekening BRI Cik Ditiro',
+            'bri_cik_ditiro_account_number' => 'No Rekening BRI',
+            'has_qris_bri_cik_ditiro' => 'QRIS BRI',
+            'product_names' => 'Daftar Produk',
+            'product_descriptions' => 'Deskripsi Produk',
+        ];
+
+        $changedFields = [];
+        foreach ($validated as $key => $value) {
+            // Skip tracking if it's an array (like product_names) or file for simple comparison
+            if (is_array($value)) {
+                if (json_encode($registration->$key) !== json_encode($value)) {
+                    $changedFields[] = $fieldLabels[$key] ?? $key;
+                }
+                continue;
+            }
+
+            if ($registration->$key != $value && isset($fieldLabels[$key])) {
+                $changedFields[] = $fieldLabels[$key];
+            }
+        }
+
         // Handle File Uploads
         if ($request->hasFile('business_logo')) {
             if ($registration->business_logo) {
                 Storage::disk('public')->delete($registration->business_logo);
             }
             $validated['business_logo'] = $request->file('business_logo')->store('business_logos', 'public');
+            if (!in_array('Logo Usaha', $changedFields)) {
+                $changedFields[] = 'Logo Usaha';
+            }
         }
 
         $registration->update($validated);
 
-        return redirect()->route('admin.registrations.show', $registration->id)
-            ->with('success', 'Data anggota berhasil diperbarui.');
+        $successMsg = 'Data anggota berhasil diperbarui.';
+        if (!empty($changedFields)) {
+            $successMsg .= ' Perubahan: ' . implode(', ', $changedFields);
+        }
+
+        return redirect()->route('admin.registrations.edit', $registration->id)
+            ->with('success', $successMsg);
     }
 
     public function destroy(Registration $registration)
